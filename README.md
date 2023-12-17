@@ -1,7 +1,59 @@
 # Тестовое задание.
 ## Часть 1
 
+```
+-- Таблица "Клиенты" (Customers)
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(20)
+);
+
+-- Таблица "Автомобили" (Cars)
+CREATE TABLE Cars (
+    car_id INT PRIMARY KEY,
+    brand VARCHAR(255),
+    model VARCHAR(255),
+    status VARCHAR(50),
+    registration_number VARCHAR(20)
+);
+
+-- Таблица "Заказы" (Orders)
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    car_id INT,
+    order_status VARCHAR(50),
+    start_date timestamp without time zone,
+    end_date timestamp without time zone,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (car_id) REFERENCES Cars(car_id)
+);
+
+-- Таблица "Платежи" (Payments)
+CREATE TABLE Payments (
+    payment_id INT PRIMARY KEY,
+    order_id INT,
+    amount DECIMAL(10, 2),
+    payment_date timestamp without time zone,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+);
+
+-- Таблица "Техобслуживание" (Maintenance)
+CREATE TABLE Maintenance (
+    maintenance_id INT PRIMARY KEY,
+    car_id INT,
+    maintenance_date timestamp without time zone,
+    description TEXT,
+    FOREIGN KEY (car_id) REFERENCES Cars(car_id)
+);
+
+```
+
 ## Часть 2
+
 ### Выполнить на ВМ следующие инструкции:
 a. Создайте файл file1 в текущей директории
 <div align='center'>
